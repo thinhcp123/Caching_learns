@@ -13,6 +13,7 @@ public class AirportCacheService:IAirportCacheService
 
     public async Task<List<Airport>> GetAirportsAsync()
     {
+        Random random = new Random();
         if (!_cache.TryGetValue("Airports", out List<Airport> airports))
         {
             airports = await FetchAirportsFromSource();
@@ -25,7 +26,6 @@ public class AirportCacheService:IAirportCacheService
     
     private async Task<List<Airport>> FetchAirportsFromSource()
     {
-        await Task.Delay(100); 
         return new List<Airport>
         {
             new Airport("LAX", "Los Angeles International Airport"),
