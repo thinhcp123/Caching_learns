@@ -14,11 +14,12 @@ public class AirportCacheService:IAirportCacheService
     public async Task<List<Airport>> GetAirportsAsync()
     {
         Random random = new Random();
+                int randomNumber = random.Next(10);
         if (!_cache.TryGetValue("Airports", out List<Airport> airports))
         {
             airports = await FetchAirportsFromSource();
 
-            _cache.Set("Airports", airports, TimeSpan.FromMinutes(10)); // Adjust the TTL as needed
+            _cache.Set("Airports", airports, TimeSpan.FromMinutes(randomNumber)); // Adjust the TTL as needed
         }
 
         return airports;
